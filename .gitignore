@@ -3,3 +3,4 @@ package-lock.json
 filters.csv
 dashboards.csv
 node_modules
+.DS_Store
