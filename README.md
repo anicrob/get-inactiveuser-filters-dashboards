@@ -3,7 +3,7 @@
 
 ## Description
 
-Follow the set up directions in the Setup Instructions section to run this script. This script will allow you to find all inactive users in your Jira instance and find any dashboards or filters that they might own. This data is then exported into a CSV file.
+Follow the set up directions in the Setup Instructions section to run this script. This script will allow you to find any dashboards or filters that inactive Jira users might own. This data is then exported into a CSV file.
 
 ## Table of Contents
 * [Setup Instructions](#setup-instructions)

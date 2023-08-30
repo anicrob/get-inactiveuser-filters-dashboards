@@ -65,7 +65,7 @@ const findInactiveUserDashboards = async (userIds) => {
           let selfUrl = values.self;
           dashboardSelfUrls.push(selfUrl);
         } else {
-          console.log(`no dashboards were found for user with id ${id}`);
+          // console.log(`no dashboards were found for user with id ${id}`);
           return;
         }
       } catch (err) {
@@ -126,7 +126,7 @@ const findInactiveUserFilters = async (userIds) => {
           let selfUrl = values.self;
           filterSelfUrls.push(selfUrl);
         } else {
-          console.log(`no filters were found for user with id ${id}`);
+          // console.log(`no filters were found for user with id ${id}`);
           return;
         }
       } catch (err) {
@@ -187,10 +187,15 @@ const returnCSV = async (data, fileName) => {
   //To add new line for each object's value
   const finalData = csvRows.join("\n");
 
-  // use fs.write to create the .csv file
+  // use fs.writeFile to create the .csv file
   fs.writeFile(`${fileName}.csv`, finalData, { encoding: "utf8" }, (err) => {
-    if (err) console.log(err);
+    if (err) {
+      console.log(err);
+      return;
+    }
   });
+
+  console.log(`${fileName}.csv has been successfully created!`);
 };
 
 module.exports = {
