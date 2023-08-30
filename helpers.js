@@ -27,7 +27,7 @@ const getInactiveUsers = async () => {
     }
     const inActiveUserIds = allUsersData
       .filter(
-        (user) => user.accountType === "atlassian" && user.active === true
+        (user) => user.accountType === "atlassian" && user.active === false
       )
       .map((user) => user.accountId);
 
