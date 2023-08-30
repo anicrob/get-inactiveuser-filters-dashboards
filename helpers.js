@@ -169,7 +169,7 @@ const findInactiveUserFilters = async (userIds) => {
 
 const returnCSV = async (data, fileName) => {
   const csvRows = [];
-  //get the headers (properties) from the object in the first array
+  //get the headers (properties) from the first object in the data array
   const headers = Object.keys(data[0]);
   //add the headers to the csvRows array, joined by a comma
   csvRows.push(headers.join(","));
