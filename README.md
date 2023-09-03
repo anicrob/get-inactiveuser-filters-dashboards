@@ -1,4 +1,4 @@
-# Get the Jira Dashboard & Filters Owned by Inactive Jira Users in Cloud Script
+# Get CSV of the Jira Dashboard & Filters Owned by Inactive Jira Users in Cloud Script
 
 
 ## Description
