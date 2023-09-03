@@ -7,7 +7,8 @@ const getSelfUrls = async (userIds, type) => {
   await Promise.all(
     userIds.map(async (id) => {
       try {
-        const response = await fetch(`${process.env.URL}/rest/api/3/${type}/search/?accountId=${id}`,
+        const response = await fetch(
+          `${process.env.URL}/rest/api/3/${type}/search/?accountId=${id}`,
           {
             method: "GET",
             headers: {
@@ -33,6 +34,29 @@ const getSelfUrls = async (userIds, type) => {
   );
   return selfUrls;
 };
+
+const getDetails = async (selfUrls) => {
+  const allDetails = [];
+  await Promise.all(
+    selfUrls.map(async (url) => {
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            Authorization: `Basic ${process.env.API_KEY}`,
+            Accept: "application/json",
+          },
+        });
+        let data = await response.json();
+        allDetails.push(data);
+      } catch (err) {
+        console.log(err);
+        return;
+      }
+    })
+  );
+  return allDetails;
+}
 const getInactiveUsers = async () => {
   try {
     const response = await fetch(`${process.env.URL}/rest/api/3/users/search`, {
@@ -74,25 +98,7 @@ const getInactiveUsers = async () => {
 
 const findInactiveUserDashboards = async (userIds) => {
   const dashboardSelfUrls = await getSelfUrls(userIds, "dashboard");
-  let allDashboardDetails = [];
-  await Promise.all(
-    dashboardSelfUrls.map(async (url) => {
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            Authorization: `Basic ${process.env.API_KEY}`,
-            Accept: "application/json",
-          },
-        });
-        let data = await response.json();
-        allDashboardDetails.push(data);
-      } catch (err) {
-        console.log(err);
-        return;
-      }
-    })
-  );
+  const allDashboardDetails = await getDetails(dashboardSelfUrls);
   const refinedDashboardDetails = allDashboardDetails.map(
     ({ description, id, name, owner }) => ({
       id,
@@ -106,25 +112,7 @@ const findInactiveUserDashboards = async (userIds) => {
 
 const findInactiveUserFilters = async (userIds) => {
   const filterSelfUrls = await getSelfUrls(userIds, "filter");
-  let allFilterDetails = [];
-  await Promise.all(
-    filterSelfUrls.map(async (url) => {
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            Authorization: `Basic ${process.env.API_KEY}`,
-            Accept: "application/json",
-          },
-        });
-        let data = await response.json();
-        allFilterDetails.push(data);
-      } catch (err) {
-        console.log(err);
-        return;
-      }
-    })
-  );
+  const allFilterDetails = await getDetails(filterSelfUrls);
   const refinedFilterDetails = allFilterDetails.map(
     ({ id, name, description, owner, jql, viewUrl }) => ({
       id,
