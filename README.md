@@ -45,6 +45,8 @@ API_KEY - see Basic Auth section on how to get this value; see permissions secti
 
 URL - this is the Atlassian url instance (e.g. https://your-domain.atlassian.net)
 
+Note: you can use .env.TEMPLATE as a reference
+
 ## Usage
 
 To use this script, run it by using the following command:
