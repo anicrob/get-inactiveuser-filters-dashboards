@@ -119,8 +119,8 @@ const findInactiveUserFilters = async (userIds) => {
       name,
       description: description ? description : " ",
       owner: owner.displayName,
-      jql,
       viewUrl,
+      jql,
     })
   );
   return refinedFilterDetails;
