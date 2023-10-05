@@ -13,7 +13,7 @@ const script = async () => {
     returnCSV(inactiveDashboards, "dashboards");
     const inactiveFilters = await findInactiveUserFilters(inactiveUserIds);
     returnCSV(inactiveFilters, "filters");
-  }
+  } else console.log(`There are no inactive users in this instance.`);
 };
 
 script();
